@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VideoGames</title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <main class="container ctrl-<%= controller_name %> actn-<%= action_name %>">
+    <%= yield %>
+  </main>
+
+  <div class="modal fade js-modal-registration" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Register Player</h4>
+        </div>
+        <div class="modal-body">
+          <select class="form-control" name="player_id" id="js-player"></select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary js-save-player">Save changes</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <%= javascript_include_tag 'application' %>
+</body>
+</html>
