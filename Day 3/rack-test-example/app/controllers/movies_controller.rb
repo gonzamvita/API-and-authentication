@@ -32,7 +32,7 @@ class MoviesController < ApplicationController
         format.json { render :show, status: :created, location: @movie }
       else
         format.html { render :new }
-        format.json { render json: @movie.errors, status: :unprocessable_entity }
+        format.json { render json: @movie.errors, status: :bad_request }
       end
     end
   end

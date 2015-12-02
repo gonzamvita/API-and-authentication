@@ -52,11 +52,25 @@ RSpec.describe "Movies", type: :request do
   end
 
   describe "POST /movies", type: :request do
-    it "creates a proper movie" do
-      post movies_path(format: :json), movie: {title: 'Hair'}
+    context "when there is NO title" do
+      it "responds with an error" do
+        post movies_path(format: :json), movie: {title: ''}
+        expect(response).to have_http_status(400)
+      end
+    end
 
-      expect(response).to have_http_status(201)
-      expect(Movie.last.title).to eq('Hair')
+    context "when there is title" do
+      before { post movies_path(format: :json), movie: {title: 'Hair'} }
+
+      it "creates a proper movie" do
+        expect(Movie.last.title).to eq('Hair')
+      end
+
+      it "responds with the movie title" do
+        expect(response).to have_http_status(201)
+        body = JSON.parse(response.body)
+        expect(body['title']).to eq('Hair')
+      end
     end
   end
 end
